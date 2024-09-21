@@ -3,7 +3,7 @@ Here's the updated `README.md` that includes using **Postman** for testing the A
 
 ---
 
-# BookStore Management System
+# BookCafe Management System
 
 This is a simple **CRUD (Create, Read, Update, Delete)** Bookstore Management System built using **Java Spring Boot** for the backend and **HTML, JavaScript** for the frontend. The project is developed using **IntelliJ IDEA**.
 
