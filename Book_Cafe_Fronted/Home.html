@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management System</title>
+    <style>
+        /* Global styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            /* Light gray background */
+        }
+        /* Navbar styles */
+        
+        .navbar {
+            background-color: #333;
+            /* Dark gray background */
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .navbar a {
+            color: #fff;
+            /* White text */
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Container styles */
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            /* White background */
+            border: 1px solid #ddd;
+            /* Light gray border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Soft shadow */
+        }
+        /* Button styles */
+        
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            /* White text */
+            background-color: #4CAF50;
+            /* Green background */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #3e8e41;
+            /* Darker green background on hover */
+        }
+        /* Header styles */
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            /* Dark gray text */
+        }
+        /* Footer styles */
+        
+        .footer {
+            background-color: #333;
+            /* Dark gray background */
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            /* White text */
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+
+    <!-- Header -->
+    <h1 style="text-align: center;">Welcome to the Product Management System</h1>
+
+    <!-- Container -->
+    <div class="container">
+        <button onclick="window.location.href='View.html';">View Book List</button>
+        <button onclick="window.location.href='Add.html';">Add New Book</button>
+        <button onclick="window.location.href='Delete.html'">Delete Book</button>
+        <button onclick="window.location.href='FindById.html'">Search Book BY ID</button>
+        <button onclick="window.location.href='Update.html'">Update Book by ID</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        &copy; 2023 Product Management System Team
+    </div>
+</body>
+
+</html>

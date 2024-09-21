@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        /* Global styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            /* Light gray background */
+        }
+        /* Container styles */
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            /* White background */
+            border: 1px solid #ddd;
+            /* Light gray border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Soft shadow */
+        }
+        /* Form styles */
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        label {
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button[type="submit"] {
+            background-color: #4CAF50;
+            /* Green background */
+            color: #fff;
+            /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+            /* Darker green background on hover */
+        }
+        /* Anchor tag styles */
+        
+        a {
+            text-decoration: none;
+            color: #337ab7;
+            /* Dark blue text */
+        }
+        
+        a:hover {
+            color: #23527c;
+            /* Darker blue text on hover */
+        }
+        /* Header styles */
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            /* Dark gray text */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add New Product</h1>
+        <form id="productForm">
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="py">Publication Year:</label>
+            <input type="number" id="py" name="py" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="publisher">Publisher:</label>
+            <input type="text" id="publisher" name="publisher" required>
+
+            <label for="stock">Available Stock:</label>
+            <input type="number" id="stock" name="stock" required>
+
+            <button type="submit">Add Product</button>
+        </form>
+        <a href="Home.html">Book </a>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Handle form submission
+    document.getElementById('productForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Collect form data
+        const title = document.getElementById('title').value;
+        const auth = document.getElementById('author').value;
+        const py = document.getElementById('py').value;
+        const price = document.getElementById('price').value;
+        const publisher = document.getElementById('publisher').value;
+        const stock = document.getElementById('stock').value;
+
+        // Send POST request
+        fetch('http://localhost:9388/book/insert', {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,
+                    author: auth,
+                    publicationYear: py,
+                    price: price,
+                    publisher: publisher,
+                    availableStock: stock
+
+
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Product added:', data);
+                alert('Product added successfully!');
+                // Optionally redirect to the product list page
+                window.location.href = 'View.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <style>
+        /* Global styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            /* Light gray background */
+        }
+        /* Container styles */
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            /* White background */
+            border: 1px solid #ddd;
+            /* Light gray border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Soft shadow */
+        }
+        /* Form styles */
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        label {
+            margin-bottom: 10px;
+        }
+        
+        input[type="number"],
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button[type="submit"] {
+            background-color: #4CAF50;
+            /* Green background */
+            color: #fff;
+            /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+            /* Darker green background on hover */
+        }
+        /* Anchor tag styles */
+        
+        a {
+            text-decoration: none;
+            color: #337ab7;
+            /* Dark blue text */
+        }
+        
+        a:hover {
+            color: #23527c;
+            /* Darker blue text on hover */
+        }
+        /* Header styles */
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            /* Dark gray text */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Update Book</h1>
+        <form id="updateForm">
+            <label for="id">Book ID:</label>
+            <input type="number" id="id" name="id" required>
+            <br><br>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+            <br><br>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+            <!-- Add more fields as needed -->
+            <button type="submit">Update Book</button>
+        </form>
+        <a href="Home.html">Home</a>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Handle form submission
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Get the book ID and updated details from the form
+        const id = document.getElementById('id').value;
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        // Create a JSON object to send to the server
+        const updatedBook = {
+            title: title,
+            author: author,
+            // Add more fields as needed
+        };
+
+        // Send PUT request to update the book
+        fetch(`http://localhost:9388/book/update/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedBook)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('Book updated:', data);
+                alert('Book updated successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+
+</html>

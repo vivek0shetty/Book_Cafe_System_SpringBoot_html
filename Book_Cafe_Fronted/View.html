@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        /* Global styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            /* Light gray background */
+        }
+        /* Table styles */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            /* Light gray border */
+        }
+        
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+            /* Light gray border */
+        }
+        
+        th {
+            background-color: #337ab7;
+            /* Dark blue background */
+            color: #fff;
+            /* White text */
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            /* Light gray background */
+        }
+        
+        tr:hover {
+            background-color: #e5e5e5;
+            /* Lighter gray background on hover */
+        }
+        /* Header styles */
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            /* Dark gray text */
+        }
+        /* Link styles */
+        
+        a {
+            text-decoration: none;
+            color: #337ab7;
+            /* Dark blue text */
+        }
+        
+        a:hover {
+            color: #23527c;
+            /* Darker blue text on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Book Available List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Publication Year</th>
+                <th>Price</th>
+                <th>Publisher</th>
+                <th>Available In Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data rows will be inserted here -->
+        </tbody>
+    </table>
+    <a href="Home.html">Home</a>
+
+    <script>
+        // Function to populate table with fetched data
+        function populateTable(data) {
+            const tableBody = document.querySelector('tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.title}</td>
+                    <td>${item.author}</td>
+                    <td>${item.publicationYear}</td>
+                    <td>${item.price}</td>
+                    <td>${item.publisher}</td>
+                    <td>${item.availableStock}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Fetch data from the API
+        function fetchData() {
+            fetch('http://localhost:9388/book/gBook', {
+                    method: 'GET',
+                    // mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    populateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Initial fetch to populate the table
+        fetchData();
+    </script>
+</body>
+
+</html>

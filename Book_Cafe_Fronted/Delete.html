@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Book</title>
+    <style>
+        /* Global styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            /* Light gray background */
+        }
+        /* Container styles */
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            /* White background */
+            border: 1px solid #ddd;
+            /* Light gray border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Soft shadow */
+        }
+        /* Form styles */
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        label {
+            margin-bottom: 10px;
+        }
+        
+        input[type="number"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button[type="submit"] {
+            background-color: #e74c3c;
+            /* Red background */
+            color: #fff;
+            /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #c0392b;
+            /* Darker red background on hover */
+        }
+        /* Anchor tag styles */
+        
+        a {
+            text-decoration: none;
+            color: #337ab7;
+            /* Dark blue text */
+        }
+        
+        a:hover {
+            color: #23527c;
+            /* Darker blue text on hover */
+        }
+        /* Header styles */
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            /* Dark gray text */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Delete Book</h1>
+        <form id="deleteForm">
+            <label for="id">Book ID:</label>
+            <input type="number" id="id" name="id" required>
+            <button type="submit">Delete Book</button>
+        </form>
+        <a href="Home.html">Home Page</a>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Handle form submission
+    document.getElementById('deleteForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Get the book ID from the form
+        const id = document.getElementById('id').value;
+
+        // Send DELETE request to delete the book
+        fetch(`http://localhost:9388/book/delete/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('Book deleted:', data);
+                alert('Book deleted successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+
+</html>
